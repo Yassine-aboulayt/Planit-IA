@@ -1,0 +1,180 @@
+{
+  "projectName": "Demo project",
+  "totalEstimatedHours": 34,
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "title": "Set up repository and project structure",
+      "description": "Create the GitHub repository, folders and base HTML files.",
+      "userStories": [
+        "As a developer, I want a clean structure so that the project is easy to maintain."
+      ],
+      "acceptanceCriteria": [
+        "Repository is public",
+        "Folders css/js exist"
+      ],
+      "priority": "High",
+      "importance": "High",
+      "size": "XS",
+      "estimatedTime": 2,
+      "deadline": "Day 1",
+      "status": "To Do",
+      "dependencies": []
+    },
+    {
+      "id": "TASK-002",
+      "title": "Design the UI with Tailwind CSS",
+      "description": "Define colors, typography and the main layout.",
+      "userStories": [
+        "As a user, I want a clear interface so that I can find information quickly."
+      ],
+      "acceptanceCriteria": [
+        "Layout is responsive",
+        "Colors are consistent"
+      ],
+      "priority": "High",
+      "importance": "Medium",
+      "size": "M",
+      "estimatedTime": 5,
+      "deadline": "Day 2",
+      "status": "To Do",
+      "dependencies": [
+        "TASK-001"
+      ]
+    },
+    {
+      "id": "TASK-003",
+      "title": "Build the project form with validation",
+      "description": "Create the form and validate each field in real time.",
+      "userStories": [
+        "As a user, I want clear error messages so that I can fix my input."
+      ],
+      "acceptanceCriteria": [
+        "Errors appear under fields",
+        "Submit is disabled when invalid"
+      ],
+      "priority": "High",
+      "importance": "High",
+      "size": "M",
+      "estimatedTime": 6,
+      "deadline": "Day 3",
+      "status": "To Do",
+      "dependencies": [
+        "TASK-002"
+      ]
+    },
+    {
+      "id": "TASK-004",
+      "title": "Implement the API service",
+      "description": "Write the Fetch calls and error handling.",
+      "userStories": [
+        "As a developer, I want a dedicated API module so that calls are reusable."
+      ],
+      "acceptanceCriteria": [
+        "HTTP errors are handled",
+        "JSON is parsed"
+      ],
+      "priority": "Critical",
+      "importance": "High",
+      "size": "L",
+      "estimatedTime": 7,
+      "deadline": "Day 4",
+      "status": "To Do",
+      "dependencies": [
+        "TASK-001"
+      ]
+    },
+    {
+      "id": "TASK-005",
+      "title": "Render the task list dynamically",
+      "description": "Generate cards from the JSON data.",
+      "userStories": [
+        "As a user, I want to see my tasks so that I can follow my work."
+      ],
+      "acceptanceCriteria": [
+        "Cards show title and status"
+      ],
+      "priority": "High",
+      "importance": "High",
+      "size": "M",
+      "estimatedTime": 5,
+      "deadline": "Day 5",
+      "status": "To Do",
+      "dependencies": [
+        "TASK-003",
+        "TASK-004"
+      ]
+    },
+    {
+      "id": "TASK-006",
+      "title": "Persist data in LocalStorage",
+      "description": "Save and reload projects with JSON.stringify and JSON.parse.",
+      "userStories": [
+        "As a user, I want my data saved so that I do not lose it on refresh."
+      ],
+      "acceptanceCriteria": [
+        "Data survives a page reload"
+      ],
+      "priority": "Medium",
+      "importance": "Medium",
+      "size": "S",
+      "estimatedTime": 3,
+      "deadline": "Day 6",
+      "status": "To Do",
+      "dependencies": [
+        "TASK-005"
+      ]
+    },
+    {
+      "id": "TASK-007",
+      "title": "Test, document and deploy",
+      "description": "Final tests, README and Vercel deployment.",
+      "userStories": [
+        "As a teacher, I want a documented deployed project so that I can evaluate it."
+      ],
+      "acceptanceCriteria": [
+        "README explains setup",
+        "Site is online"
+      ],
+      "priority": "Medium",
+      "importance": "High",
+      "size": "M",
+      "estimatedTime": 6,
+      "deadline": "Day 7",
+      "status": "To Do",
+      "dependencies": [
+        "TASK-006"
+      ]
+    }
+  ],
+  "duration": 7,
+  "developers": 1,
+  "description": "Projet de demonstration charge depuis sample-plan.json.",
+  "phases": [
+    {
+      "id": "PHASE-001",
+      "title": "Fondations et conception",
+      "taskIds": [
+        "TASK-001",
+        "TASK-002"
+      ]
+    },
+    {
+      "id": "PHASE-002",
+      "title": "Developpement des fonctionnalites",
+      "taskIds": [
+        "TASK-003",
+        "TASK-004",
+        "TASK-005"
+      ]
+    },
+    {
+      "id": "PHASE-003",
+      "title": "Persistance et livraison",
+      "taskIds": [
+        "TASK-006",
+        "TASK-007"
+      ]
+    }
+  ]
+}
