@@ -129,6 +129,23 @@
         </section>
     </div>
 
+    <div id="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-title" class="hidden fixed inset-0 z-20 bg-black bg-opacity-50 overflow-y-auto p-4">
+        <section class="bg-white rounded-xl p-6 max-w-lg mx-auto my-12">
+            <div class="flex items-center justify-between gap-4 mb-4">
+                <h2 id="settings-title" class="text-xl font-bold">Paramètres IA</h2>
+                <button id="fermer-settings" type="button" class="text-gray-500 p-2" aria-label="Fermer les paramètres" disabled>✕</button>
+            </div>
+            <p class="text-gray-500 text-sm mb-5">Ce premier livrable utilise le plan exemple. Aucun appel à une API IA n'est effectué.</p>
+            <label for="api-key" class="block font-bold mb-2">Clé API pour la prochaine étape</label>
+            <input id="api-key" type="password" autocomplete="off" class="w-full border border-gray-300 rounded-lg p-3" placeholder="Facultatif en mode démo">
+            <p class="text-xs text-gray-500 mt-2">Enregistrée dans sessionStorage uniquement. La clé n'est pas utilisée pour charger la démo.</p>
+            <p id="settings-message" role="status" class="text-purple-700 text-sm mt-4"></p>
+            <div class="flex flex-wrap gap-3 mt-6">
+                <button id="save-key" type="button" class="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-lg" disabled>Enregistrer</button>
+                <button id="settings-demo" type="button" class="border border-gray-300 p-3 rounded-lg" disabled>Mode démo</button>
+            </div>
+        </section>
+    </div>
 
     <footer class="text-center text-sm text-gray-500 p-6">PLANIT AI · Des idées claires. Des projets qui avancent.</footer>
 </body>
