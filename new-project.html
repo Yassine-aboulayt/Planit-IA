@@ -19,8 +19,75 @@
         </nav>
     </header>
 
-    <main class="p-6 flex-1">
-        <h1 class="text-3xl font-bold">Nouveau projet</h1>
+    <main class="w-full max-w-3xl mx-auto p-6 flex-1">
+        <a href="index.html" class="text-sm text-purple-600">← Retour au Dashboard</a>
+        <div class="my-6">
+            <h1 class="text-3xl font-bold">Nouveau projet</h1>
+            <p class="text-gray-500 mt-3">Posez les bases de votre prochain projet.</p>
+        </div>
+        <p id="demo-message" role="status" class="text-purple-700 mb-4 break-words"></p>
+        <button id="reessayer-demo" type="button" hidden class="border border-purple-300 text-purple-700 p-3 rounded-lg mb-4" disabled>Réessayer</button>
+
+        <form id="project-form" novalidate class="bg-white border border-gray-200 p-6 rounded-xl">
+            <div class="flex flex-col gap-6">
+                <div>
+                    <label for="name" class="block font-bold mb-2">Nom du projet</label>
+                    <input id="name" name="name" type="text" required maxlength="100" placeholder="Ex. Mon portfolio" class="w-full border border-gray-300 rounded-lg p-3" aria-describedby="name-help">
+                    <p id="name-help" class="text-sm text-red-600 mt-2"></p>
+                </div>
+                <div>
+                    <label for="description" class="block font-bold mb-2">Description</label>
+                    <input id="description" name="description" type="text" required maxlength="300" placeholder="Votre projet en une phrase" class="w-full border border-gray-300 rounded-lg p-3" aria-describedby="description-help">
+                    <p id="description-help" class="text-sm text-red-600 mt-2"></p>
+                </div>
+                <div>
+                    <label for="brief" class="block font-bold mb-2">Brief complet</label>
+                    <textarea id="brief" name="brief" rows="6" required maxlength="10000" placeholder="Objectifs, pages, fonctionnalités et contraintes…" class="w-full border border-gray-300 rounded-lg p-3" aria-describedby="brief-help"></textarea>
+                    <p id="brief-help" class="text-sm text-red-600 mt-2"></p>
+                </div>
+                <div class="flex flex-col md:flex-row gap-5">
+                    <div class="flex-1">
+                        <label for="duration" class="block font-bold mb-2">Durée (en jours)</label>
+                        <input id="duration" name="duration" type="number" min="1" step="1" required placeholder="7" class="w-full border border-gray-300 rounded-lg p-3" aria-describedby="duration-help">
+                        <p id="duration-help" class="text-sm text-red-600 mt-2"></p>
+                    </div>
+                    <div class="flex-1">
+                        <label for="developers" class="block font-bold mb-2">Nombre de développeurs</label>
+                        <input id="developers" name="developers" type="number" min="1" step="1" required placeholder="1" class="w-full border border-gray-300 rounded-lg p-3" aria-describedby="developers-help">
+                        <p id="developers-help" class="text-sm text-red-600 mt-2"></p>
+                    </div>
+                </div>
+                <div>
+                    <label for="technologies" class="block font-bold mb-2">Technologies</label>
+                    <input id="technologies" name="technologies" type="text" required maxlength="300" placeholder="HTML, Tailwind CSS, JavaScript" class="w-full border border-gray-300 rounded-lg p-3" aria-describedby="technologies-help">
+                    <p id="technologies-help" class="text-sm text-red-600 mt-2"></p>
+                </div>
+                <div>
+                    <label for="difficulty" class="block font-bold mb-2">Niveau de difficulté</label>
+                    <select id="difficulty" name="difficulty" required class="w-full border border-gray-300 rounded-lg p-3" aria-describedby="difficulty-help">
+                        <option value="">Choisir un niveau</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                    <p id="difficulty-help" class="text-sm text-red-600 mt-2"></p>
+                </div>
+            </div>
+
+            <div class="bg-purple-50 text-purple-800 text-sm rounded-lg p-4 mt-6">
+                Mode démo : les tâches viennent de sample-plan.json. Les échéances sont adaptées à la durée choisie. Aucun plan n'est généré par une IA.
+            </div>
+            <div class="flex flex-wrap gap-3 mt-6">
+                <button id="generate-plan" type="submit" disabled class="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-lg font-bold">Générer le plan de développement</button>
+                <button id="mode-demo" type="button" class="border border-gray-300 hover:bg-gray-50 p-3 rounded-lg" disabled>Mode démo</button>
+                <a href="index.html" class="text-gray-500 p-3">Annuler</a>
+            </div>
+            <section id="generation-state" data-state="idle" role="status" class="mt-5 text-sm text-purple-700">
+                <span id="generation-spinner" hidden class="spinner"></span>
+                <span id="generation-text">Prêt. Complétez le formulaire pour charger votre plan.</span>
+                <button id="reessayer" type="button" hidden class="border border-purple-300 p-2 rounded-lg mt-3" disabled>Réessayer</button>
+            </section>
+        </form>
     </main>
 
 
