@@ -99,3 +99,13 @@ if (formulaire !== null) {
     };
     verifierFormulaire(false);
 }
+
+try {
+    projets = chargerProjets();
+    if (document.getElementById("project-list") !== null) {
+        afficherDashboard(projets);
+    }
+
+} catch (erreur) {
+    afficherMessage(erreur.message);
+}
