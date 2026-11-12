@@ -91,7 +91,9 @@ function afficherBoard(projet) {
                 } else {
                     carte.querySelector(".dependances").textContent = "Dépend de : " + tache.dependencies.join(", ");
                 }
-                carte.disabled = true;
+                carte.onclick = function() {
+                    ouvrirTache(tache.id);
+                };
                 zone.appendChild(carte);
                 nombre = nombre + 1;
             }
@@ -103,5 +105,15 @@ function afficherBoard(projet) {
             vide.textContent = "Aucune tâche pour le moment.";
             zone.appendChild(vide);
         }
+    }
+}
+
+function afficherListe(id, elements) {
+    let liste = document.getElementById(id);
+    liste.innerHTML = "";
+    for (let i = 0; i < elements.length; i++) {
+        let ligne = document.createElement("li");
+        ligne.textContent = elements[i];
+        liste.appendChild(ligne);
     }
 }

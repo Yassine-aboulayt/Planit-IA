@@ -37,6 +37,33 @@ function verifierFormulaire(afficherErreurs) {
     return valide;
 }
 
+function ouvrirTache(id) {
+    tacheActuelle = trouverTache(projetActuel, id);
+    if (tacheActuelle === null) {
+        afficherMessage("Cette tâche n'existe plus.");
+        return;
+    }
+    document.getElementById("task-heading").textContent = tacheActuelle.id;
+    document.getElementById("edit-title").value = tacheActuelle.title;
+    document.getElementById("edit-description").value = tacheActuelle.description;
+    document.getElementById("edit-priority").value = tacheActuelle.priority;
+    document.getElementById("edit-size").value = tacheActuelle.size;
+    document.getElementById("edit-deadline").value = tacheActuelle.deadline.replace("Day ", "");
+    document.getElementById("edit-deadline").max = projetActuel.duration;
+    document.getElementById("edit-status").value = tacheActuelle.status;
+    document.getElementById("task-importance").textContent = tacheActuelle.importance;
+    document.getElementById("task-time").textContent = tacheActuelle.estimatedTime + " h";
+    document.getElementById("task-dependencies").textContent = "Aucune";
+    if (tacheActuelle.dependencies.length > 0) {
+        document.getElementById("task-dependencies").textContent = tacheActuelle.dependencies.join(", ");
+    }
+    afficherListe("task-stories", tacheActuelle.userStories);
+    afficherListe("task-criteria", tacheActuelle.acceptanceCriteria);
+    document.getElementById("task-error").textContent = "";
+    ouvrirFenetre("task-modal");
+    document.getElementById("edit-title").focus();
+}
+
 document.getElementById("ouvrir-settings").onclick = function() {
     document.getElementById("settings-message").textContent = "";
     try {
@@ -116,7 +143,14 @@ try {
         }
 
 
-
+        document.getElementById("fermer-tache").onclick = function() {
+            fermerFenetre("task-modal");
+        };
+        document.getElementById("task-modal").onclick = function(evenement) {
+            if (evenement.target === this) {
+                fermerFenetre("task-modal");
+            }
+        };
     }
 } catch (erreur) {
     afficherMessage(erreur.message);
