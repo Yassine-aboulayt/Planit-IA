@@ -105,7 +105,19 @@ try {
     if (document.getElementById("project-list") !== null) {
         afficherDashboard(projets);
     }
+    if (document.getElementById("project-board") !== null) {
+        let parametres = new URLSearchParams(location.search);
+        projetActuel = trouverProjet(projets, parametres.get("id"));
+        if (projetActuel === null) {
+            document.getElementById("projet-introuvable").hidden = false;
+        } else {
+            document.getElementById("project-board").hidden = false;
+            afficherBoard(projetActuel);
+        }
 
+
+
+    }
 } catch (erreur) {
     afficherMessage(erreur.message);
 }
