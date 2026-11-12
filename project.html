@@ -89,19 +89,19 @@
             </div>
             <form id="task-form" novalidate>
                 <label for="edit-title" class="block font-bold mb-2">Titre</label>
-                <input disabled id="edit-title" type="text" required maxlength="300" class="w-full border border-gray-300 p-3 rounded-lg mb-5">
+                <input id="edit-title" type="text" required maxlength="300" class="w-full border border-gray-300 p-3 rounded-lg mb-5">
                 <label for="edit-description" class="block font-bold mb-2">Description</label>
-                <textarea disabled id="edit-description" rows="4" required class="w-full border border-gray-300 p-3 rounded-lg mb-5"></textarea>
+                <textarea id="edit-description" rows="4" required class="w-full border border-gray-300 p-3 rounded-lg mb-5"></textarea>
                 <div class="flex flex-col md:flex-row gap-4 mb-5">
                     <div class="flex-1">
                         <label for="edit-priority" class="block font-bold mb-2">Priorité</label>
-                        <select disabled id="edit-priority" class="w-full border border-gray-300 p-3 rounded-lg">
+                        <select id="edit-priority" class="w-full border border-gray-300 p-3 rounded-lg">
                             <option>Low</option><option>Medium</option><option>High</option><option>Critical</option>
                         </select>
                     </div>
                     <div class="flex-1">
                         <label for="edit-size" class="block font-bold mb-2">Taille</label>
-                        <select disabled id="edit-size" class="w-full border border-gray-300 p-3 rounded-lg">
+                        <select id="edit-size" class="w-full border border-gray-300 p-3 rounded-lg">
                             <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option>
                         </select>
                     </div>
@@ -109,11 +109,11 @@
                 <div class="flex flex-col md:flex-row gap-4 mb-5">
                     <div class="flex-1">
                         <label for="edit-deadline" class="block font-bold mb-2">Deadline (jour)</label>
-                        <input disabled id="edit-deadline" type="number" min="1" step="1" required class="w-full border border-gray-300 p-3 rounded-lg">
+                        <input id="edit-deadline" type="number" min="1" step="1" required class="w-full border border-gray-300 p-3 rounded-lg">
                     </div>
                     <div class="flex-1">
                         <label for="edit-status" class="block font-bold mb-2">Statut</label>
-                        <select disabled id="edit-status" class="w-full border border-gray-300 p-3 rounded-lg">
+                        <select id="edit-status" class="w-full border border-gray-300 p-3 rounded-lg">
                             <option>To Do</option><option>In Progress</option><option>Done</option>
                         </select>
                     </div>
@@ -129,7 +129,7 @@
                 </div>
                 <p id="task-error" role="alert" class="text-red-600 text-sm mt-4"></p>
                 <div class="flex flex-wrap gap-3 mt-5">
-                    <button type="submit" disabled class="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-lg">Enregistrer</button>
+                    <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-lg">Enregistrer</button>
                     <button id="delete-task" type="button" class="bg-red-50 text-red-600 p-3 rounded-lg" disabled>Supprimer</button>
                 </div>
             </form>

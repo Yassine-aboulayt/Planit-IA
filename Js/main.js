@@ -136,6 +136,28 @@ function ouvrirTache(id) {
     document.getElementById("edit-title").focus();
 }
 
+function enregistrerTache(evenement) {
+    evenement.preventDefault();
+    let valeurs = {
+        title: document.getElementById("edit-title").value.trim(),
+        description: document.getElementById("edit-description").value.trim(),
+        priority: document.getElementById("edit-priority").value,
+        size: document.getElementById("edit-size").value,
+        deadline: "Day " + document.getElementById("edit-deadline").value,
+        status: document.getElementById("edit-status").value
+    };
+    try {
+        let copie = modifierTache(projetActuel, tacheActuelle.id, valeurs);
+        enregistrerProjet(copie);
+        projetActuel = copie;
+        afficherBoard(projetActuel);
+        fermerFenetre("task-modal");
+        afficherMessage("Tâche enregistrée.");
+    } catch (erreur) {
+        document.getElementById("task-error").textContent = erreur.message;
+    }
+}
+
 document.getElementById("mode-demo").onclick = ouvrirDemo;
 document.getElementById("settings-demo").onclick = ouvrirDemo;
 document.getElementById("reessayer-demo").onclick = ouvrirDemo;
@@ -215,7 +237,7 @@ try {
             document.getElementById("project-board").hidden = false;
             afficherBoard(projetActuel);
         }
-
+        document.getElementById("task-form").addEventListener("submit", enregistrerTache);
 
         document.getElementById("fermer-tache").onclick = function() {
             fermerFenetre("task-modal");

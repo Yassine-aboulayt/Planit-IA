@@ -118,3 +118,19 @@ function verifierPlan(projet) {
     }
     return projet;
 }
+
+function modifierTache(projet, id, valeurs) {
+    let copie = JSON.parse(JSON.stringify(projet));
+    let tache = trouverTache(copie, id);
+    if (tache === null) {
+        throw new Error("Cette tâche n'existe plus.");
+    }
+    tache.title = valeurs.title;
+    tache.description = valeurs.description;
+    tache.priority = valeurs.priority;
+    tache.size = valeurs.size;
+    tache.deadline = valeurs.deadline;
+    tache.status = valeurs.status;
+    verifierPlan(copie);
+    return copie;
+}
