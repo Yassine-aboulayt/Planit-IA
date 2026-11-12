@@ -40,7 +40,9 @@ function afficherDashboard(projets) {
         carte.querySelector("progress").setAttribute("aria-label", "Progression de " + projet.projectName);
         carte.querySelector(".pourcentage").textContent = pourcentage + " % terminé";
         carte.querySelector(".ouvrir").href = "project.html?id=" + encodeURIComponent(projet.id);
-        carte.querySelector(".supprimer").disabled = true;
+        carte.querySelector(".supprimer").onclick = function() {
+            demanderSuppressionProjet(projet.id);
+        };
         liste.appendChild(carte);
     }
 }

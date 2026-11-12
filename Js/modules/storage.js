@@ -54,3 +54,14 @@ function enregistrerProjet(projet) {
     }
     enregistrerProjets(projets);
 }
+
+function supprimerProjet(id) {
+    let projets = chargerProjets();
+    for (let i = 0; i < projets.length; i++) {
+        if (projets[i].id === id) {
+            projets.splice(i, 1);
+            break;
+        }
+    }
+    enregistrerProjets(projets);
+}

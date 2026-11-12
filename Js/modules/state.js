@@ -134,3 +134,34 @@ function modifierTache(projet, id, valeurs) {
     verifierPlan(copie);
     return copie;
 }
+
+function retirerTache(projet, id) {
+    let copie = JSON.parse(JSON.stringify(projet));
+    for (let i = 0; i < copie.tasks.length; i++) {
+        if (copie.tasks[i].id === id) {
+            copie.tasks.splice(i, 1);
+            break;
+        }
+    }
+    for (let i = 0; i < copie.tasks.length; i++) {
+        let liste = copie.tasks[i].dependencies;
+        for (let j = liste.length - 1; j >= 0; j--) {
+            if (liste[j] === id) {
+                liste.splice(j, 1);
+            }
+        }
+    }
+    if (Array.isArray(copie.phases)) {
+        for (let i = 0; i < copie.phases.length; i++) {
+            let liste = copie.phases[i].taskIds;
+            for (let j = liste.length - 1; j >= 0; j--) {
+                if (liste[j] === id) {
+                    liste.splice(j, 1);
+                }
+            }
+        }
+    }
+    copie.totalEstimatedHours = calculerHeures(copie);
+    verifierPlan(copie);
+    return copie;
+}

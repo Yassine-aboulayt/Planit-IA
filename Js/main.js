@@ -109,6 +109,20 @@ async function creerProjet(evenement) {
     }
 }
 
+function demanderSuppressionProjet(id) {
+    if (!confirm("Supprimer ce projet et toutes ses tâches ?")) {
+        return;
+    }
+    try {
+        supprimerProjet(id);
+        projets = chargerProjets();
+        afficherDashboard(projets);
+        afficherMessage("Projet supprimé.");
+    } catch (erreur) {
+        afficherMessage(erreur.message);
+    }
+}
+
 function ouvrirTache(id) {
     tacheActuelle = trouverTache(projetActuel, id);
     if (tacheActuelle === null) {
@@ -158,10 +172,25 @@ function enregistrerTache(evenement) {
     }
 }
 
+function supprimerTache() {
+    if (!confirm("Supprimer cette tâche et la retirer des dépendances ?")) {
+        return;
+    }
+    try {
+        let copie = retirerTache(projetActuel, tacheActuelle.id);
+        enregistrerProjet(copie);
+        projetActuel = copie;
+        afficherBoard(projetActuel);
+        fermerFenetre("task-modal");
+        afficherMessage("Tâche supprimée.");
+    } catch (erreur) {
+        document.getElementById("task-error").textContent = erreur.message;
+    }
+}
+
 document.getElementById("mode-demo").onclick = ouvrirDemo;
 document.getElementById("settings-demo").onclick = ouvrirDemo;
 document.getElementById("reessayer-demo").onclick = ouvrirDemo;
-
 document.getElementById("ouvrir-settings").onclick = function() {
     document.getElementById("settings-message").textContent = "";
     try {
@@ -203,7 +232,6 @@ document.addEventListener("keydown", function(evenement) {
     }
 });
 
-
 if (formulaire !== null) {
     for (let i = 0; i < champsProjet.length; i++) {
         let nom = champsProjet[i];
@@ -238,7 +266,7 @@ try {
             afficherBoard(projetActuel);
         }
         document.getElementById("task-form").addEventListener("submit", enregistrerTache);
-
+        document.getElementById("delete-task").onclick = supprimerTache;
         document.getElementById("fermer-tache").onclick = function() {
             fermerFenetre("task-modal");
         };
