@@ -80,9 +80,33 @@ function verifierFormulaire(afficherErreurs) {
         }
     }
     let valide = formulaireValide(infos);
-    document.getElementById("generate-plan").disabled = true;
+    document.getElementById("generate-plan").disabled = !valide || chargement;
     document.getElementById("reessayer").disabled = !valide || chargement;
     return valide;
+}
+
+async function creerProjet(evenement) {
+    evenement.preventDefault();
+    if (chargement || !verifierFormulaire(true)) {
+        return;
+    }
+    let infos = lireFormulaire();
+    etatChargement(true);
+    afficherGeneration("loading", "Chargement du plan de démonstration…");
+    try {
+        let plan = await chargerPlanDemo();
+        let projet = preparerProjetDemo(plan, infos);
+        enregistrerProjet(projet);
+        afficherGeneration("success", "Plan enregistré. Ouverture du Task Board…");
+        location.href = "project.html?id=" + encodeURIComponent(projet.id);
+    } catch (erreur) {
+        afficherGeneration("error", erreur.message);
+    } finally {
+        chargement = false;
+        document.getElementById("mode-demo").disabled = false;
+        document.getElementById("settings-demo").disabled = false;
+        verifierFormulaire(false);
+    }
 }
 
 function ouvrirTache(id) {
@@ -170,9 +194,7 @@ if (formulaire !== null) {
             verifierFormulaire(false);
         });
     }
-    formulaire.addEventListener("submit", function(evenement) {
-        evenement.preventDefault();
-    });
+    formulaire.addEventListener("submit", creerProjet);
     document.getElementById("reessayer").onclick = function() {
         formulaire.requestSubmit();
     };
