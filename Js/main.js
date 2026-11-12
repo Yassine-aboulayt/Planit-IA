@@ -14,6 +14,54 @@ function fermerFenetre(id) {
     document.body.classList.remove("overflow-hidden");
 }
 
+function etatChargement(actif) {
+    chargement = actif;
+    document.getElementById("mode-demo").disabled = actif;
+    document.getElementById("settings-demo").disabled = actif;
+    document.getElementById("reessayer-demo").hidden = true;
+    if (formulaire !== null) {
+        document.getElementById("reessayer").hidden = true;
+        verifierFormulaire(false);
+    }
+}
+
+function afficherGeneration(etat, texte) {
+    let zone = document.getElementById("generation-state");
+    zone.setAttribute("data-state", etat);
+    document.getElementById("generation-text").textContent = texte;
+    document.getElementById("generation-spinner").hidden = etat !== "loading";
+    document.getElementById("reessayer").hidden = etat !== "error";
+}
+
+async function ouvrirDemo() {
+    if (chargement) {
+        return;
+    }
+    fermerFenetre("settings-modal");
+    etatChargement(true);
+    afficherMessage("Chargement du plan exemple…");
+    try {
+        let plan = await chargerPlanDemo();
+        let liste = chargerProjets();
+        let ancien = trouverProjet(liste, "demo-project");
+        if (ancien === null) {
+            plan.id = "demo-project";
+            enregistrerProjet(plan);
+        }
+        location.href = "project.html?id=demo-project";
+    } catch (erreur) {
+        afficherMessage(erreur.message);
+        document.getElementById("reessayer-demo").hidden = false;
+    } finally {
+        chargement = false;
+        document.getElementById("mode-demo").disabled = false;
+        document.getElementById("settings-demo").disabled = false;
+        if (formulaire !== null) {
+            verifierFormulaire(false);
+        }
+    }
+}
+
 function lireFormulaire() {
     let infos = {};
     for (let i = 0; i < champsProjet.length; i++) {
@@ -63,6 +111,10 @@ function ouvrirTache(id) {
     ouvrirFenetre("task-modal");
     document.getElementById("edit-title").focus();
 }
+
+document.getElementById("mode-demo").onclick = ouvrirDemo;
+document.getElementById("settings-demo").onclick = ouvrirDemo;
+document.getElementById("reessayer-demo").onclick = ouvrirDemo;
 
 document.getElementById("ouvrir-settings").onclick = function() {
     document.getElementById("settings-message").textContent = "";
